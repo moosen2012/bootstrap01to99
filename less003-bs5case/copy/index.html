@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爱维达</title>
+    <link href="https://cdn.staticfile.org/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #B9B4B4
+        }
+
+        .card {
+            border: none;
+            height: 100%
+        }
+
+        .copy-button {
+            height: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative
+        }
+
+        .tip {
+            background-color: #263646;
+            padding: 0 14px;
+            line-height: 27px;
+            position: absolute;
+            border-radius: 4px;
+            z-index: 100;
+            color: #fff;
+            font-size: 12px;
+            animation-name: tip;
+            animation-duration: .6s;
+            animation-fill-mode: both
+        }
+
+        .tip:before {
+            content: "";
+            background-color: #263646;
+            height: 10px;
+            width: 10px;
+            display: block;
+            position: absolute;
+            transform: rotate(45deg);
+            top: -4px;
+            left: 17px
+        }
+
+        #copied_tip {
+            animation-name: come_and_leave;
+            animation-duration: 1s;
+            animation-fill-mode: both;
+            bottom: -35px;
+            left: 2px
+        }
+
+        .text-line {
+            font-size: 14px
+        }
+    </style>
+</head>
+
+<body>
+<div class="container mt-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-6">
+            <div class="card p-3 px-4">
+                <div class="d-flex justify-content-between align-items-center mb-3"><span class="text-line me-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</span>
+                    <button onclick="copy('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod','#copy_button_1')"
+                            id="copy_button_1" class="btn btn-sm btn-success copy-button">Copy
+                    </button>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3"><span class="text-line me-2">Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+                    <button onclick="copy('Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','#copy_button_2')"
+                            id="copy_button_2" class="btn btn-sm btn-success copy-button">Copy
+                    </button>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3"><span class="text-line me-2">Duis aute irure dolor in reprehenderit in voluptate velit</span>
+                    <button onclick="copy('Duis aute irure dolor in reprehenderit in voluptate velit','#copy_button_3')"
+                            id="copy_button_3" class="btn btn-sm btn-success copy-button">Copy
+                    </button>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3"><span class="text-line me-2">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.</span>
+                    <button onclick="copy('Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.','#copy_button_4')"
+                            id="copy_button_4" class="btn btn-sm btn-success copy-button">Copy
+                    </button>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3"><span class="text-line me-2">Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+                    <button onclick="copy('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod','#copy_button_5')"
+                            id="copy_button_5" class="btn btn-sm btn-success copy-button">Copy
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.staticfile.org/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.staticfile.org/jquery/3.7.1/jquery.min.js"></script>
+
+<script>
+    function copy(text, target) {
+        setTimeout(function () {
+            $('#copied_tip').remove();
+        }, 800);
+        $(target).append("<div class='tip' id='copied_tip'>Copied!</div>");
+        var input = document.createElement('input');
+        input.setAttribute('value', text);
+        document.body.appendChild(input);
+        input.select();
+        var result = document.execCommand('copy');
+        document.body.removeChild(input)
+        return result;
+    }
+</script>
+</body>
+
+</html>

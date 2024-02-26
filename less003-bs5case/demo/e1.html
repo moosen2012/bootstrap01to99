@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #sidebar {
+            width: 200px;
+            background-color: #e0e0e0;
+            float: left;
+        }
+
+        #sidebarContent ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #sidebarContent li {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        #content {
+            margin-left: 200px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="sidebar">
+    <div id="sidebarContent">
+        <ul>
+            <li class="menu-item" data-menu="page1.html">Menu 1</li>
+            <li class="menu-item" data-menu="page2.html">Menu 2</li>
+            <li class="menu-item" data-menu="page3.html">Menu 3</li>
+        </ul>
+    </div>
+</div>
+
+<div id="content">
+    <!-- Content area -->
+</div>
+
+<script>
+    function loadContent(pageUrl) {
+        var contentElement = document.getElementById('content');
+
+        // 清空之前的内容
+        contentElement.innerHTML = '';
+
+        fetch(pageUrl)
+            .then(response => response.text())
+            .then(html => {
+                // 将新的HTML内容插入到 #content 区域
+                contentElement.innerHTML = html;
+
+                // 加载右侧页面的 JavaScript 脚本
+                loadScript();
+            });
+    }
+
+    function loadScript() {
+        // 自定义的右侧页面 JavaScript 代码
+        // console.log('这是右侧页面的 JavaScript 代码');
+        // 添加script标签到页面中
+        // var scripts = contentElement.getElementsByTagName('script');
+        // for (var i = 0; i < scripts.length; i++) {
+        //     eval(scripts[i].innerText);
+        // }
+
+        // 在加载的 HTML 页面中查找 script 标签，并执行其中的 JavaScript 代码
+        var scriptTags = html.match(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi);
+
+        if (scriptTags && scriptTags.length > 0) {
+            for (var i = 0; i < scriptTags.length; i++) {
+                eval(scriptTags[i]);
+            }
+        }
+
+    }
+
+
+    // 获取所有的菜单项，并添加点击事件监听器
+    var menuItems = document.getElementsByClassName('menu-item');
+    for (var i = 0; i < menuItems.length; i++) {
+        menuItems[i].addEventListener('click', function(e) {
+            var pageUrl = e.target.getAttribute('data-menu');
+            loadContent(pageUrl);
+        });
+    }
+</script>
+
+</body>
+</html>

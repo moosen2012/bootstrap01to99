@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Animated Hamburger Menu Icon HTML CSS</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        #hamburger {
+            cursor: pointer;
+            margin: 100px auto;
+            display: table;
+        }
+
+        .bar1, .bar2, .bar3 {
+            background-color: #3f51b5;
+            width: 40px;
+            height: 4px;
+            transition: 0.5s;
+            margin: 7px 0;
+        }
+
+        .rotate-icon .bar1 {
+            -webkit-transform: rotate(-45deg) translate(-8px, 6px);
+            transform: rotate(-45deg) translate(-8px, 6px);
+        }
+
+        .rotate-icon .bar2 {
+            opacity: 0;
+        }
+
+        .rotate-icon .bar3 {
+            -webkit-transform: rotate(42deg) translate(-9px, -8px);
+            transform: rotate(42deg) translate(-9px, -8px);
+        }
+    </style>
+</head>
+<body>
+
+<div id="hamburger" onclick="clickFunction()">
+    <div class="bar1"></div>
+    <div class="bar2"></div>
+    <div class="bar3"></div>
+</div>
+
+
+<script>
+    function clickFunction() {
+        var para = document.getElementById("hamburger");
+        para.classList.toggle("rotate-icon");
+    }
+</script>
+
+</body>
+</html>
